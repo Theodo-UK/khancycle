@@ -2,7 +2,9 @@ machine:
   xcode:
     version: "7.3"
 
-# dependencies:
+dependencies:
+  pre:
+    - npm install -g npm
 #   override:
 #     - ./circle/install_nvm.sh
 #     - npm install
