@@ -5,6 +5,8 @@ machine:
 dependencies:
   pre:
     - npm install -g npm
+  cache_directories:
+    - node_modules
 #   override:
 #     - ./circle/install_nvm.sh
 #     - npm install
