@@ -1,18 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-
-class Home extends Component {
-  render() {
-    const helloText = "Hello!"
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          {helloText}
-        </Text>
-      </View>
-    )
-  }
-}
+import React, { Component } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,4 +15,22 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home
+const helloText = 'Hello!';
+
+class Home extends Component {
+  constructor() {
+    super();
+    this.state = { styles };
+  }
+  render() {
+    return (
+      <View style={this.state.styles.container}>
+        <Text style={this.state.styles.welcome}>
+          {helloText}
+        </Text>
+      </View>
+    );
+  }
+}
+
+export default Home;
