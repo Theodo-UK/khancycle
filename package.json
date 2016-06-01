@@ -9,10 +9,9 @@
     "posttest": "rm node_modules/KhanCycle && mv .babelrc .babelrc.test"
   },
   "dependencies": {
-    "react": "^15.0.2",
+    "react": "~15.0.2",
     "react-dom": "15.0.2",
-    "react-native": "^0.26.2",
-    "react-native-mock": "^0.2.2"
+    "react-native": "^0.26.2"
   },
   "devDependencies": {
     "babel-core": "^6.9.1",
