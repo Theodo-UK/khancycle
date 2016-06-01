@@ -11,12 +11,11 @@ import {
   Text,
   View
 } from 'react-native';
+import Home from './src/components/Home/Home'
 
 class KhanCycle extends Component {
   render() {
-    return (
-      null
-    );
+    return (<Home />)
   }
 }
 
