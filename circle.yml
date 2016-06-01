@@ -2,10 +2,10 @@ machine:
   xcode:
     version: "7.3"
 
-dependencies:
-  override:
-    - ./circle/install_nvm.sh
-    - npm install
+# dependencies:
+#   override:
+#     - ./circle/install_nvm.sh
+#     - npm install
 
 test:
   # Do not replace by `npm test` as `npm test` ends by `|| true`
