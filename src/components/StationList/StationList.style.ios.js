@@ -1,6 +1,11 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  listView: {
+    // Border is temporary -- should eventually be replaced by navigation bar
+    borderTopWidth: 20,
+    borderTopColor: '#999999',
+  },
   row: {
     flexDirection: 'row',
     justifyContent: 'center',

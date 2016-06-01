@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { ListView } from 'react-native';
-import styles from './StationList.style.js';
+import styles from './StationList.style';
 
 class StationList extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class StationList extends Component {
 
   render() {
     return (
-      <ListView
+      <ListView style={styles.listView}
         dataSource={this.state.dataSource}
         renderRow={this.renderRow}
         renderSeparator={this.renderSeparator}
