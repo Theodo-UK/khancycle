@@ -1,35 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import StationList from '../StationList/StationList';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-});
-
-const helloText = 'Hello!';
+const stationListElement = function () {
+  return <StationList />;
+};
 
 class Home extends Component {
-  constructor() {
-    super();
-    this.state = { styles };
-  }
   render() {
-    return (
-      <View style={this.state.styles.container}>
-        <Text style={this.state.styles.welcome}>
-          {helloText}
-        </Text>
-      </View>
-    );
+    return stationListElement();
   }
 }
 
