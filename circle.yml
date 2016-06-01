@@ -12,5 +12,5 @@ test:
   pre:
     - ln -snf ../ node_modules/KhanCycle && mv .babelrc.test .babelrc
   override:
-    - ./node_modules/.bin/mocha --require react-native-mock/mock.js --require src/mocks --compilers js:babel-core/register "src/**/*.spec.js"
+    - ./node_modules/.bin/mocha --require react-native-mock/mock.js --compilers js:babel-core/register "src/**/*.spec.js"
     - ./node_modules/.bin/eslint "src/**/*.js"
