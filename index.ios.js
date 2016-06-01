@@ -1,15 +1,10 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+ * KhanCycle by Theodo
+ * https://github.com/Theodo-UK/khancycle
  */
 
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Text,
-  View
-} from 'react-native';
+import { AppRegistry } from 'react-native';
 import Home from './src/components/Home/Home'
 
 class KhanCycle extends Component {
