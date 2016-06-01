@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { ListView } from 'react-native';
+import styles from './StationList.style.js';
 
 class StationList extends Component {
   constructor(props) {
@@ -39,21 +40,5 @@ class StationList extends Component {
     );
   };
 }
-
-var styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: 10,
-    backgroundColor: '#F6F6F6',
-  },
-  separator: {
-    height: 1,
-    backgroundColor: '#CCCCCC',
-  },
-  text: {
-    flex: 1,
-  },
-});
 
 export default StationList;
