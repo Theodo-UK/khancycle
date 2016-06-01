@@ -32,7 +32,7 @@ class StationList extends Component {
 
   render() {
     return (
-      <ListView
+      <ListView style={styles.listView}
         dataSource={this.state.dataSource}
         renderRow={this.renderRow}
         renderSeparator={this.renderSeparator}

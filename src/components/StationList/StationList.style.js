@@ -1,6 +1,10 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 const styles = StyleSheet.create({
+  listView: {
+    borderTopWidth: (Platform.OS === 'ios') ? 20 : 0,
+    borderTopColor: '#999999',
+  },
   row: {
     flexDirection: 'row',
     justifyContent: 'center',
