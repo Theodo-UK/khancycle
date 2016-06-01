@@ -4,12 +4,24 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "mocha --compilers js:babel-core/register 'src/**/*.spec.js' || true"
+    "pretest": "ln -snf ../ node_modules/KhanCycle && mv .babelrc.test .babelrc",
+    "test": "mocha --require react-native-mock/mock.js --compilers js:babel-core/register 'src/**/*.spec.js' || true",
+    "posttest": "rm node_modules/KhanCycle && mv .babelrc .babelrc.test"
   },
   "dependencies": {
-    "mocha": "^2.5.3",
     "react": "^15.0.2",
+    "react-dom": "15.0.2",
     "react-native": "^0.26.2",
+    "react-native-mock": "^0.2.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-eslint": "^6.0.4",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-preset-react-native": "^1.9.0",
+    "chai": "^3.5.0",
+    "enzyme": "^2.3.0",
+    "mocha": "^2.5.3",
     "react-native-mock": "^0.2.2"
   }
 }
