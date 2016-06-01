@@ -1,4 +1,4 @@
-import React, { Text } from 'react-native';
+import React from 'react-native';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import Home from './Home';

@@ -1,4 +1,4 @@
-import React, { Text, ListView } from 'react-native';
+import React, { ListView } from 'react-native';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import StationList from './StationList';
