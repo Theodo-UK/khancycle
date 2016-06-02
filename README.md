@@ -20,7 +20,7 @@
 ` jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];`
 and uncomment this line:
 `jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];`
-
+- ensure that in `ios/KhanCycle/Info.plist` and `ios/KhanCycle/Info.plist`, the `CFBundleIdentifier` is the same as in the provisioning profile (i.e. `uk.co.theodo.khancycle`)
 - open `ios/KhanCycle.xcodeproj`, Product > Clean, Product > Archive - choose options for Ad Hoc distribution
 - click 'Export' and then upload the resulting `.ipa` to HockeyApp
 
