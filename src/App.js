@@ -1,20 +1,16 @@
-// import { createStore } from 'redux';
-import React, { Component } from 'react';
-import Home from './components/Home/Home';
-// import rootReducer from './reducers/index';
-// import stations from './data/stations';
+import { createStore } from 'redux';
+import { Component } from 'react';
+import rootReducer from './reducers/index';
+import stations from './data/stations';
+import routes from './config/Routes';
 
 // Create the default state and store
-// const defaultState = { stations };
-// const store = createStore(rootReducer, defaultState);
-
-const homeElement = function () {
-  return <Home />;
-};
+const defaultState = { stations };
+const store = createStore(rootReducer, defaultState);
 
 class App extends Component {
   render() {
-    return homeElement();
+    return routes(store);
   }
 }
 
