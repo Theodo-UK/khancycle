@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ListView } from 'react-native';
+import { Text, View, ListView, RefreshControl } from 'react-native';
 import styles from './StationList.style';
 import CityBikes from '../../services/CityBikes';
 
@@ -9,31 +9,50 @@ class StationList extends Component {
   constructor(props) {
     super(props);
     this.dataSource = dataSourceTemplate;
+    this.updateStations = props.updateStations;
+    this.state = {
+      dataSource: dataSourceTemplate,
+      refreshing: false
+    }
+  }
 
-    // Refresh list of stations via CityBikes API.
+  getStationsList(changeRefreshingState = true) {
     CityBikes.getStationsList()
       .then(
-        (result) => { props.updateStations(result.network.stations); }
+        (result) => {
+          this.updateStations(result.network.stations);
+          if (changeRefreshingState) this.setState({refreshing: false});
+        }
       );
   }
 
-  componentDidMount() {
-    // Get the user's current location.
+  refreshData(changeRefreshingState = true) {
+    if (changeRefreshingState) this.setState({refreshing: true});
+
+    // First, get the user's current location
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.warn(position.coords.longitude);
-        console.warn(position.coords.latitude);
+        var longitude = position.coords.longitude;
+        var latitude = position.coords.latitude;
+        // Then retrieve the list of stations
+        this.getStationsList(changeRefreshingState);
       },
       (error) => {
         console.warn('Error!');
+        // Then retrieve the list of stations
+        this.getStationsList(changeRefreshingState);
       },
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     );
   }
 
+  componentDidMount() {
+    this.refreshData(false);
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.stations !== this.props.stations) {
-      this.dataSource = dataSourceTemplate.cloneWithRows(nextProps.stations);
+      this.state.dataSource = dataSourceTemplate.cloneWithRows(nextProps.stations);
     }
   }
 
@@ -58,8 +77,14 @@ class StationList extends Component {
   render() {
     return (
       <ListView
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this.refreshData.bind(this)}
+          />
+        }
         style={styles.container}
-        dataSource={this.dataSource}
+        dataSource={this.state.dataSource}
         renderRow={this.renderRow}
         renderSeparator={this.renderSeparator}
       />
