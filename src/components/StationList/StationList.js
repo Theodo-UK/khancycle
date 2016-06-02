@@ -7,7 +7,7 @@ class StationList extends Component {
     var dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     super(props);
     this.state = {
-      dataSource: dataSource.cloneWithRows(['Bike Station 1', 'Bike Station 2']),
+      dataSource: dataSource.cloneWithRows(props.stations),
     };
   }
 
@@ -16,7 +16,7 @@ class StationList extends Component {
       <View key={`row-${sectionID}-${rowID}`}>
         <View style={styles.row}>
           <Text style={styles.text}>
-            {rowData}
+            {rowData.name}
           </Text>
         </View>
       </View>
@@ -40,5 +40,11 @@ class StationList extends Component {
     );
   }
 }
+
+StationList.propTypes = {
+  stations: React.PropTypes.arrayOf(React.PropTypes.shape({
+    name: React.PropTypes.string,
+  }).isRequired),
+};
 
 export default StationList;
