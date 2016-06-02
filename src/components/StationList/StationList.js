@@ -8,8 +8,7 @@ const dataSourceTemplate = new ListView.DataSource({ rowHasChanged: (r1, r2) => 
 class StationList extends Component {
   constructor(props) {
     super(props);
-    // Populate view with existing stations
-    this.dataSource = dataSourceTemplate.cloneWithRows(props.stations);
+    this.dataSource = dataSourceTemplate;
 
     // Refresh list of stations via CityBikes API.
     CityBikes.getStationsList()
