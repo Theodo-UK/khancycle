@@ -12,7 +12,7 @@ class StationList extends Component {
     this.dataSource = dataSourceTemplate.cloneWithRows(props.stations);
 
     // Refresh list of stations via CityBikes API.
-    CityBikes.get('networks/barclays-cycle-hire', 'fields=stations')
+    CityBikes.getStationsList()
       .then(
         (result) => { props.updateStations(result.network.stations); }
       );

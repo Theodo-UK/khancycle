@@ -23,6 +23,10 @@ class CityBikes {
         .end(handleResponse.bind(this, resolve, reject));
     });
   }
+
+  static getStationsList() {
+    return this.get('networks/barclays-cycle-hire', 'fields=stations');
+  }
 }
 
 export default CityBikes;
