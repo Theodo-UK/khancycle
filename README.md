@@ -14,7 +14,7 @@
 ## how to test
 `npm test`
 
-## how to build for deployment
+## how to build for staging deployment
 ### iOS
 - in `ios/KhanCycle/AppDelegate.m`, comment out this line:
 ` jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];`
