@@ -1,5 +1,8 @@
 function stations(state = [], action) {
-  return state;
+  switch (action) {
+    default:
+      return state;
+  }
 }
 
 export default stations;
