@@ -1,14 +1,26 @@
 import React, { Component } from 'react';
 import { Text, View, ListView } from 'react-native';
 import styles from './StationList.style';
+import CityBikes from '../../services/CityBikes';
+
+const dataSourceTemplate = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
 class StationList extends Component {
   constructor(props) {
-    var dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     super(props);
-    this.state = {
-      dataSource: dataSource.cloneWithRows(props.stations),
-    };
+    this.dataSource = dataSourceTemplate;
+
+    // Refresh list of stations via CityBikes API.
+    CityBikes.getStationsList()
+      .then(
+        (result) => { props.updateStations(result.network.stations); }
+      );
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.stations !== this.props.stations) {
+      this.dataSource = dataSourceTemplate.cloneWithRows(nextProps.stations);
+    }
   }
 
   renderRow(rowData, sectionID, rowID) {
@@ -33,7 +45,7 @@ class StationList extends Component {
     return (
       <ListView
         style={styles.container}
-        dataSource={this.state.dataSource}
+        dataSource={this.dataSource}
         renderRow={this.renderRow}
         renderSeparator={this.renderSeparator}
       />
@@ -48,6 +60,7 @@ StationList.propTypes = {
         name: React.PropTypes.string.isRequired,
       }),
     }).isRequired),
+  updateStations: React.PropTypes.func,
 };
 
 export default StationList;
