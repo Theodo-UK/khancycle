@@ -16,7 +16,7 @@ class StationList extends Component {
       <View key={`row-${sectionID}-${rowID}`}>
         <View style={styles.row}>
           <Text style={styles.text}>
-            {rowData.name}
+            {rowData.extra.name}
           </Text>
         </View>
       </View>
@@ -42,9 +42,12 @@ class StationList extends Component {
 }
 
 StationList.propTypes = {
-  stations: React.PropTypes.arrayOf(React.PropTypes.shape({
-    name: React.PropTypes.string,
-  }).isRequired),
+  stations: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      extra: React.PropTypes.shape({
+        name: React.PropTypes.string.isRequired,
+      }),
+    }).isRequired),
 };
 
 export default StationList;
