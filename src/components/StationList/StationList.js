@@ -17,6 +17,20 @@ class StationList extends Component {
       );
   }
 
+  componentDidMount() {
+    // Get the user's current location.
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.warn(position.coords.longitude);
+        console.warn(position.coords.latitude);
+      },
+      (error) => {
+        console.warn('Error!');
+      },
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.stations !== this.props.stations) {
       this.dataSource = dataSourceTemplate.cloneWithRows(nextProps.stations);
