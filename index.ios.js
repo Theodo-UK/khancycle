@@ -5,11 +5,11 @@
 
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
-import Home from './src/components/Home/Home'
+import App from './src/App'
 
 class KhanCycle extends Component {
   render() {
-    return (<Home />)
+    return (<App />)
   }
 }
 
