@@ -32,27 +32,30 @@ class StationList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.stations !== this.props.stations || nextProps.location !== this.props.location) {
-      this.closestStations = [];
-      this.closestDistances = [];
+    this.closestStations = [];
+    this.closestDistances = [];
 
-      for (const station of nextProps.stations) {
-        const dLatitude = station.latitude - nextProps.location.latitude;
-        const dLongitude = station.longitude - nextProps.location.longitude;
-        const squaredDistance = (dLatitude * dLatitude) + (dLongitude * dLongitude);
+    // If we have a location...
+    if (nextProps.location.latitude != null && nextProps.location.longitude != null) {
+      if (nextProps.stations !== this.props.stations || nextProps.location !== this.props.location) {
+        for (const station of nextProps.stations) {
+          const dLatitude = station.latitude - nextProps.location.latitude;
+          const dLongitude = station.longitude - nextProps.location.longitude;
+          const squaredDistance = (dLatitude * dLatitude) + (dLongitude * dLongitude);
 
-        // The 'furthestClosestDistance' is the furthest distance in the 'closestDistances' array.
-        // (That array is sorted, so we know that it's always the last element.) If the current
-        // station is *closer* than this furthest distance, then we know we should add it to the
-        // 'closestStations' array. Otherwise, we move on to the next station...
-        const furthestClosestDistance = this.closestDistances[this.closestDistances.length - 1];
-        if (squaredDistance < furthestClosestDistance || this.closestStations.length < maxStations) {
-          this.updateClosestStations(station, squaredDistance);
+          // The 'furthestClosestDistance' is the furthest distance in the 'closestDistances' array.
+          // (That array is sorted, so we know that it's always the last element.) If the current
+          // station is *closer* than this furthest distance, then we know we should add it to the
+          // 'closestStations' array. Otherwise, we move on to the next station...
+          const furthestClosestDistance = this.closestDistances[this.closestDistances.length - 1];
+          if (squaredDistance < furthestClosestDistance || this.closestStations.length < maxStations) {
+            this.updateClosestStations(station, squaredDistance);
+          }
         }
       }
-
-      this.state.dataSource = dataSourceTemplate.cloneWithRows(this.closestStations);
     }
+
+    this.state.dataSource = dataSourceTemplate.cloneWithRows(this.closestStations);
   }
 
   getStationsList(changeRefreshingState = true) {
@@ -107,8 +110,8 @@ class StationList extends Component {
         that.getStationsList(changeRefreshingState);
       },
       () => {
-        // Then retrieve the list of stations
-        that.getStationsList(changeRefreshingState);
+        that.props.updateLocation(null, null);
+        if (changeRefreshingState) that.setState({ refreshing: false });
       },
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
