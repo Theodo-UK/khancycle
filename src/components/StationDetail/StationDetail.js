@@ -12,16 +12,16 @@ class StationDetail extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>
-          <Text style={styles.detailLabel}>Bikes: </Text>
-          <Text style={styles.detailNumber}>{this.props.free_bikes}</Text>
-        </Text>
-
-        <Text>
-          <Text style={styles.detailLabel}>Spaces: </Text>
-          <Text style={styles.detailNumber}>{this.props.empty_slots}</Text>
-        </Text>
-
+        <View style={styles.details}>
+          <View>
+            <Text style={styles.detailLabel}>Bikes: </Text>
+            <Text style={styles.detailNumber}>{this.props.free_bikes}</Text>
+          </View>
+          <View>
+            <Text style={styles.detailLabel}>Spaces: </Text>
+            <Text style={styles.detailNumber}>{this.props.empty_slots}</Text>
+          </View>
+        </View>
         <ReportBrokenBikes />
       </View>
     );
