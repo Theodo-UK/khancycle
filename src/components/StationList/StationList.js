@@ -4,6 +4,7 @@ import styles from './StationList.style';
 import CityBikes from '../../services/CityBikes';
 
 const dataSourceTemplate = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+var that;
 
 class StationList extends Component {
   constructor(props) {
@@ -12,38 +13,9 @@ class StationList extends Component {
     this.updateStations = props.updateStations;
     this.state = {
       dataSource: dataSourceTemplate,
-      refreshing: false
-    }
-  }
-
-  getStationsList(changeRefreshingState = true) {
-    CityBikes.getStationsList()
-      .then(
-        (result) => {
-          this.updateStations(result.network.stations);
-          if (changeRefreshingState) this.setState({refreshing: false});
-        }
-      );
-  }
-
-  refreshData(changeRefreshingState = true) {
-    if (changeRefreshingState) this.setState({refreshing: true});
-
-    // First, get the user's current location
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        var longitude = position.coords.longitude;
-        var latitude = position.coords.latitude;
-        // Then retrieve the list of stations
-        this.getStationsList(changeRefreshingState);
-      },
-      (error) => {
-        console.warn('Error!');
-        // Then retrieve the list of stations
-        this.getStationsList(changeRefreshingState);
-      },
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    );
+      refreshing: false,
+    };
+    that = this;
   }
 
   componentDidMount() {
@@ -54,6 +26,36 @@ class StationList extends Component {
     if (nextProps.stations !== this.props.stations) {
       this.state.dataSource = dataSourceTemplate.cloneWithRows(nextProps.stations);
     }
+  }
+
+  getStationsList(changeRefreshingState = true) {
+    CityBikes.getStationsList()
+      .then(
+        (result) => {
+          this.updateStations(result.network.stations);
+          if (changeRefreshingState) this.setState({ refreshing: false });
+        }
+      );
+  }
+
+  refreshData(changeRefreshingState = true) {
+    if (changeRefreshingState) that.setState({ refreshing: true });
+
+    // First, get the user's current location
+    navigator.geolocation.getCurrentPosition(
+      () => {
+        // Deal with the position here.
+        // var longitude = position.coords.longitude;
+        // var latitude = position.coords.latitude;
+        // Then retrieve the list of stations
+        that.getStationsList(changeRefreshingState);
+      },
+      () => {
+        // Then retrieve the list of stations
+        that.getStationsList(changeRefreshingState);
+      },
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
   }
 
   renderRow(rowData, sectionID, rowID) {
@@ -80,7 +82,7 @@ class StationList extends Component {
         refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
-            onRefresh={this.refreshData.bind(this)}
+            onRefresh={this.refreshData}
           />
         }
         style={styles.container}
