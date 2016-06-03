@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  wrapper: {
+    margin: 10,
+    borderRadius: 6,
+  },
   button: {
     flexDirection: 'row',
     justifyContent: 'center',

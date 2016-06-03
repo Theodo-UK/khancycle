@@ -9,7 +9,7 @@ class ReportBrokenBikes extends Component {
 
   render() {
     return (
-      <TouchableHighlight onPress={this.reportBrokenBikes}>
+      <TouchableHighlight style={styles.wrapper} underlayColor="#cccccc" onPress={this.reportBrokenBikes}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>
             Report Broken Bikes
