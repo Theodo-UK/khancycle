@@ -1,8 +1,8 @@
 // update location
-export function updateLocation(longitude, latitude) {
+export function updateLocation(latitude, longitude) {
   return {
     type: 'UPDATE_LOCATION',
-    longitude,
     latitude,
+    longitude,
   };
 }

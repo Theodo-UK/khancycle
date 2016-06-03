@@ -30,9 +30,9 @@ class StationList extends Component {
       this.closestDistances = [];
 
       for (const station of nextProps.stations) {
-        const dLongitude = station.longitude - this.props.location.longitude;
         const dLatitude = station.latitude - this.props.location.latitude;
-        const squaredDistance = (dLongitude * dLongitude) + (dLatitude * dLatitude);
+        const dLongitude = station.longitude - this.props.location.longitude;
+        const squaredDistance = (dLatitude * dLatitude) + (dLongitude * dLongitude);
 
         const furthestClosestDistance = this.closestDistances[this.closestDistances.length - 1];
         if (squaredDistance < furthestClosestDistance || this.closestStations.length < maxStations) {
@@ -88,9 +88,9 @@ class StationList extends Component {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         // Deal with the position here.
-        var longitude = position.coords.longitude;
         var latitude = position.coords.latitude;
-        that.props.updateLocation(longitude, latitude);
+        var longitude = position.coords.longitude;
+        that.props.updateLocation(latitude, longitude);
         // Then retrieve the list of stations
         that.getStationsList(changeRefreshingState);
       },
@@ -146,8 +146,8 @@ StationList.propTypes = {
       }),
     }).isRequired),
   location: React.PropTypes.shape({
-    longitude: React.PropTypes.number,
     latitude: React.PropTypes.number,
+    longitude: React.PropTypes.number,
   }),
   updateStations: React.PropTypes.func,
 };

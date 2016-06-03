@@ -9,7 +9,7 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => ({
   updateStations: (stations) => dispatch(stationsActions.updateStations(stations)),
-  updateLocation: (longitude, latitude) => dispatch(locationActions.updateLocation(longitude, latitude)),
+  updateLocation: (latitude, longitude) => dispatch(locationActions.updateLocation(latitude, longitude)),
 });
 
 const StationListContainer = connect(
