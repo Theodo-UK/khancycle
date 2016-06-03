@@ -13,14 +13,14 @@ class StationDetail extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.details}>
-          <View>
+          <Text>
             <Text style={styles.detailLabel}>Bikes: </Text>
             <Text style={styles.detailNumber}>{this.props.free_bikes}</Text>
-          </View>
-          <View>
+          </Text>
+          <Text>
             <Text style={styles.detailLabel}>Spaces: </Text>
             <Text style={styles.detailNumber}>{this.props.empty_slots}</Text>
-          </View>
+          </Text>
         </View>
         <ReportBrokenBikes />
       </View>

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     margin: 20,
-    marginTop: 80,
+    marginTop: 100,
   },
   details: {
     flex: 1,
