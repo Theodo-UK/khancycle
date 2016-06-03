@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ListView, RefreshControl, TouchableHighlight  } from 'react-native';
+import { Text, View, ListView, RefreshControl, TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import styles from './StationList.style';
 import CityBikes from '../../services/CityBikes';
@@ -37,8 +37,8 @@ class StationList extends Component {
       this.closestDistances = [];
 
       for (const station of nextProps.stations) {
-        const dLatitude = station.latitude - this.props.location.latitude;
-        const dLongitude = station.longitude - this.props.location.longitude;
+        const dLatitude = station.latitude - nextProps.location.latitude;
+        const dLongitude = station.longitude - nextProps.location.longitude;
         const squaredDistance = (dLatitude * dLatitude) + (dLongitude * dLongitude);
 
         // The 'furthestClosestDistance' is the furthest distance in the 'closestDistances' array.
