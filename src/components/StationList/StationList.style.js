@@ -5,17 +5,23 @@ const styles = StyleSheet.create({
     marginTop: 64,
   },
   row: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: 10,
     backgroundColor: '#F6F6F6',
+    padding: 10,
+  },
+  details: {
+    flexDirection: 'row',
   },
   separator: {
     height: 1,
     backgroundColor: '#CCCCCC',
   },
-  text: {
-    flex: 1,
+  stationName: {
+    color: '#4f4c4c',
+  },
+  stationDetails: {
+    color: '#7f7f7f',
+    marginRight: 30,
+    fontSize: 12,
   },
 });
 

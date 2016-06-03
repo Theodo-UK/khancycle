@@ -7,14 +7,3 @@ dependencies:
     - npm install -g npm
   cache_directories:
     - node_modules
-#   override:
-#     - ./circle/install_nvm.sh
-#     - npm install
-
-test:
-  # Do not replace by `npm test` as `npm test` ends by `|| true`
-  pre:
-    - ln -snf ../ node_modules/KhanCycle && mv .babelrc.test .babelrc
-  override:
-    - ./node_modules/.bin/mocha --require react-native-mock/mock.js --require ./src/mocks --compilers js:babel-core/register "src/**/*.spec.js"
-    - ./node_modules/.bin/eslint "src/**/*.js"
