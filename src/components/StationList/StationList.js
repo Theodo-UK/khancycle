@@ -10,7 +10,6 @@ class StationList extends Component {
   constructor(props) {
     super(props);
     this.dataSource = dataSourceTemplate;
-    this.updateStations = props.updateStations;
     this.state = {
       dataSource: dataSourceTemplate,
       refreshing: false,
@@ -32,7 +31,7 @@ class StationList extends Component {
     CityBikes.getStationsList()
       .then(
         (result) => {
-          this.updateStations(result.network.stations);
+          this.props.updateStations(result.network.stations);
           if (changeRefreshingState) this.setState({ refreshing: false });
         }
       );
@@ -43,10 +42,11 @@ class StationList extends Component {
 
     // First, get the user's current location
     navigator.geolocation.getCurrentPosition(
-      () => {
+      (position) => {
         // Deal with the position here.
-        // var longitude = position.coords.longitude;
-        // var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        var latitude = position.coords.latitude;
+        that.props.updateLocation(longitude, latitude);
         // Then retrieve the list of stations
         that.getStationsList(changeRefreshingState);
       },
