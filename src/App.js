@@ -4,7 +4,7 @@ import rootReducer from './reducers/index';
 import routes from './config/routes';
 
 // Create the default state and store
-const defaultState = {};
+const defaultState = { stations: [], location: {} };
 const store = createStore(rootReducer, defaultState);
 
 class App extends Component {
