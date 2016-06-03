@@ -135,7 +135,7 @@ class StationList extends Component {
             </Text>
             <View style={styles.details}>
               <Text style={styles.stationDistance}>
-                Distance: {rowData.distance > 1000 ? `${rowData.distance/1000}km` : `${rowData.distance}m`}
+                Distance: {rowData.distance > 1000 ? `${rowData.distance / 1000}km` : `${rowData.distance}m`}
               </Text>
             </View>
             <View style={styles.details}>

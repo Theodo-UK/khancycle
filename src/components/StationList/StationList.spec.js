@@ -30,7 +30,9 @@ describe('<StationList />', () => {
     const stationList = new StationList();
     stationList.props = { station: [], location: {} };
     stationList.componentWillReceiveProps(nextProps);
-    expect(stationList.closestDistances).to.eql([2, 8, 18, 32, 50]);
+    // The expected values here are those calculated by the 'geolib' library
+    // for the latitudes and longitudes given for the test station objects
+    expect(stationList.closestDistances).to.eql([156900, 313776, 470605, 627364, 784029]);
   });
 
   it('should correctly update the list of nearest stations', () => {
