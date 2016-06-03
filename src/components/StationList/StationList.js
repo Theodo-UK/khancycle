@@ -4,12 +4,15 @@ import styles from './StationList.style';
 import CityBikes from '../../services/CityBikes';
 
 const dataSourceTemplate = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+const maxStations = 5;
 var that;
 
 class StationList extends Component {
   constructor(props) {
     super(props);
     this.dataSource = dataSourceTemplate;
+    this.closestStations = [];
+    this.closestDistances = [];
     this.state = {
       dataSource: dataSourceTemplate,
       refreshing: false,
@@ -21,9 +24,52 @@ class StationList extends Component {
     this.refreshData(false);
   }
 
+  updateClosestStations(station, distance) {
+    // If there are no closest stations already, just add station
+    if (this.closestStations.length === 0) {
+      this.closestStations.push(station);
+      this.closestDistances.push(distance);
+      return distance;
+    }
+
+    // Otherwise...
+    else {
+      // Put the station in the correct place
+      for (var i = this.closestStations.length-1; i >= 0; i--) {
+        if (distance > this.closestDistances[i]) {
+          this.closestStations.splice(i+1, 0, station);
+          this.closestDistances.splice(i+1, 0, distance);
+          break;
+        } else if (i === 0) {
+          this.closestStations.splice(0, 0, station);
+          this.closestDistances.splice(0, 0, distance);
+        }
+      }
+
+      // Truncate the array if it contains more than maxStations
+      if (this.closestStations.length > maxStations) {
+        this.closestStations.splice(maxStations);
+        this.closestDistances.splice(maxStations);
+      }
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
-    if (nextProps.stations !== this.props.stations) {
-      this.state.dataSource = dataSourceTemplate.cloneWithRows(nextProps.stations);
+    if (nextProps.stations !== this.props.stations || nextProps.location !== this.props.location) {
+      this.closestStations = [];
+      this.closestDistances = [];
+
+      for (station of nextProps.stations) {
+        let dLongitude = station.longitude - this.props.location.longitude;
+        let dLatitude = station.latitude - this.props.location.latitude;
+        let squaredDistance = dLongitude*dLongitude + dLatitude*dLatitude;
+
+        let furthestClosestDistance = this.closestDistances[this.closestDistances.length-1];
+        if (squaredDistance < furthestClosestDistance || this.closestStations.length < maxStations) {
+          this.updateClosestStations(station, squaredDistance);
+        }
+      }
+      this.state.dataSource = dataSourceTemplate.cloneWithRows(this.closestStations);
     }
   }
 
