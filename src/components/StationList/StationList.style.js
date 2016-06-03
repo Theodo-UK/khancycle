@@ -18,6 +18,11 @@ const styles = StyleSheet.create({
   stationName: {
     color: '#4f4c4c',
   },
+  stationDistance: {
+    color: '#666666',
+    marginRight: 30,
+    fontSize: 14,
+  },
   stationDetails: {
     color: '#7f7f7f',
     marginRight: 30,
