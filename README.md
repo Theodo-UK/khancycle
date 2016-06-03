@@ -40,4 +40,4 @@ and uncomment this line:
 ### Android
 - generate keystore and sign as described [here](https://facebook.github.io/react-native/docs/signed-apk-android.html)
 - enter `android` directory and run `./gradlew assembleRelease`
-- upload `android/app/build/apk/app-release.apk` to HockeyApp
+- upload `android/app/build/outputs/apk/app-release.apk` to HockeyApp
