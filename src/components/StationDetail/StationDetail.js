@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import styles from './StationDetail.style';
+import ReportBrokenBikes from '../ReportBrokenBikes/ReportBrokenBikes';
 
 class StationDetail extends Component {
   componentWillMount() {
@@ -20,6 +21,8 @@ class StationDetail extends Component {
           <Text style={styles.detailLabel}>Spaces: </Text>
           <Text style={styles.detailNumber}>{this.props.empty_slots}</Text>
         </Text>
+
+        <ReportBrokenBikes />
       </View>
     );
   }
