@@ -12,13 +12,19 @@ class StationList extends Component {
   constructor(props) {
     super(props);
     this.dataSource = dataSourceTemplate;
-    this.closestStations = [];
-    this.closestDistances = [];
     this.state = {
       dataSource: dataSourceTemplate,
       refreshing: false,
     };
+
+    // We use 'that' as the context in the 'onRefresh' method, because it
+    // needs to be passed to the 'RefreshControl' component.
     that = this;
+
+    // 'closestStations' will contain the {maxStations} closest stations to our
+    // location. 'closestDistances' will contain their corresponding distances.
+    this.closestStations = [];
+    this.closestDistances = [];
   }
 
   componentDidMount() {
@@ -35,11 +41,16 @@ class StationList extends Component {
         const dLongitude = station.longitude - this.props.location.longitude;
         const squaredDistance = (dLatitude * dLatitude) + (dLongitude * dLongitude);
 
+        // The 'furthestClosestDistance' is the furthest distance in the 'closestDistances' array.
+        // (That array is sorted, so we know that it's always the last element.) If the current
+        // station is *closer* than this furthest distance, then we know we should add it to the
+        // 'closestStations' array. Otherwise, we move on to the next station...
         const furthestClosestDistance = this.closestDistances[this.closestDistances.length - 1];
         if (squaredDistance < furthestClosestDistance || this.closestStations.length < maxStations) {
           this.updateClosestStations(station, squaredDistance);
         }
       }
+
       this.state.dataSource = dataSourceTemplate.cloneWithRows(this.closestStations);
     }
   }
