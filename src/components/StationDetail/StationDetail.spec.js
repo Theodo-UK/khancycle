@@ -1,11 +1,11 @@
-import React, { ListView } from 'react-native';
+import React from 'react-native';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import StationDetail from './StationDetail';
 
 describe('<StationDetail />', () => {
-  it('should contain a list view', () => {
+  it('should be blank', () => {
     const wrapper = shallow(<StationDetail />);
-    expect(wrapper.find(ListView)).to.have.length(1);
+    expect(wrapper.node === null);
   });
 });

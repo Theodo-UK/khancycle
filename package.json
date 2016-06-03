@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "pretest": "ln -snf ../ node_modules/KhanCycle && mv .babelrc.test .babelrc",
-    "test:mocha": "mocha --require react-native-mock/mock.js --compilers js:babel-core/register 'src/**/*.spec.js' || true",
+    "test:mocha": "mocha --require react-native-mock/mock.js --require ./src/mocks --compilers js:babel-core/register 'src/**/*.spec.js' || true",
     "test:lint": "eslint 'src/**/*.js' || true",
     "test": "npm-run-all --parallel test:*",
     "posttest": "rm node_modules/KhanCycle && mv .babelrc .babelrc.test"
