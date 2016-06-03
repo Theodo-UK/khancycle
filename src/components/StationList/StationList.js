@@ -26,8 +26,9 @@ class StationList extends Component {
 
 
   renderRow(rowData, sectionID, rowID) {
+    const goToStationDetail = () => Actions.stationDetail({ rowData });
     return (
-      <TouchableHighlight onPress={Actions.stationDetail}>
+      <TouchableHighlight onPress={goToStationDetail}>
         <View key={`row-${sectionID}-${rowID}`}>
           <View style={styles.row}>
             <Text style={styles.stationName}>
