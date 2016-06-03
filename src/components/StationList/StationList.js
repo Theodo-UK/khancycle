@@ -27,9 +27,17 @@ class StationList extends Component {
     return (
       <View key={`row-${sectionID}-${rowID}`}>
         <View style={styles.row}>
-          <Text style={styles.text}>
+          <Text style={styles.stationName}>
             {rowData.extra.name}
           </Text>
+          <View style={styles.details}>
+            <Text style={styles.stationDetails}>
+              Bikes: {rowData.free_bikes}
+            </Text>
+            <Text style={styles.stationDetails}>
+              Spaces: {rowData.empty_slots}
+            </Text>
+          </View>
         </View>
       </View>
     );
