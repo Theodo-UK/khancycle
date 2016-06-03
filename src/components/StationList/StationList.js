@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, ListView, RefreshControl, TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import geolib from 'geolib';
 import styles from './StationList.style';
 import CityBikes from '../../services/CityBikes';
 
@@ -39,18 +40,25 @@ class StationList extends Component {
     if (nextProps.location.latitude != null && nextProps.location.longitude != null) {
       if (nextProps.stations !== this.props.stations || nextProps.location !== this.props.location) {
         for (const station of nextProps.stations) {
-          const dLatitude = station.latitude - nextProps.location.latitude;
-          const dLongitude = station.longitude - nextProps.location.longitude;
-          const squaredDistance = (dLatitude * dLatitude) + (dLongitude * dLongitude);
+          // Determine distance to station
+          const distance = geolib.getDistance(
+            { latitude: station.latitude, longitude: station.longitude },
+            { latitude: nextProps.location.latitude, longitude: nextProps.location.longitude }
+          );
 
           // The 'furthestClosestDistance' is the furthest distance in the 'closestDistances' array.
           // (That array is sorted, so we know that it's always the last element.) If the current
           // station is *closer* than this furthest distance, then we know we should add it to the
           // 'closestStations' array. Otherwise, we move on to the next station...
           const furthestClosestDistance = this.closestDistances[this.closestDistances.length - 1];
-          if (squaredDistance < furthestClosestDistance || this.closestStations.length < maxStations) {
-            this.updateClosestStations(station, squaredDistance);
+          if (distance < furthestClosestDistance || this.closestStations.length < maxStations) {
+            this.updateClosestStations(station, distance);
           }
+        }
+
+        // Add these distances to the station objects
+        for (let i = 0; i < this.closestStations.length; i++) {
+          this.closestStations[i].distance = this.closestDistances[i];
         }
       }
     }
@@ -125,6 +133,11 @@ class StationList extends Component {
             <Text style={styles.stationName}>
               {rowData.extra.name}
             </Text>
+            <View style={styles.details}>
+              <Text style={styles.stationDistance}>
+                Distance: {rowData.distance > 1000 ? `${rowData.distance/1000}km` : `${rowData.distance}m`}
+              </Text>
+            </View>
             <View style={styles.details}>
               <Text style={styles.stationDetails}>
                 Bikes: {rowData.free_bikes}
