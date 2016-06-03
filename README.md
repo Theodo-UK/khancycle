@@ -1,18 +1,31 @@
 # khancycle
 
 ## how to install
-`cd khancycle`
-`npm install`
-`npm install -g react-native-cli`
 
-## how to run in simulator
-### iOS
-`react-native run-ios`
-### Android
-`react-native run-android`
+```bash
+cd khancycle
+npm install
+```
 
-## how to test
-`npm test`
+## how to run in simulator/emulator
+
+Start the packager:
+```bash
+npm start
+```
+Followed by:
+
+#### iOS
+`npm run ios`
+#### Android
+`npm run android`
+
+## Testing
+
+To run eslint and tests, run:
+```bash
+npm test
+```
 
 ## how to build for staging deployment
 ### iOS
@@ -27,4 +40,4 @@ and uncomment this line:
 ### Android
 - generate keystore and sign as described [here](https://facebook.github.io/react-native/docs/signed-apk-android.html)
 - enter `android` directory and run `./gradlew assembleRelease`
-- upload `android/app/build/apk/app-release.apk` to HockeyApp
+- upload `android/app/build/outputs/apk/app-release.apk` to HockeyApp

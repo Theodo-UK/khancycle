@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "pretest": "ln -snf ../ node_modules/KhanCycle && mv .babelrc.test .babelrc",
-    "test:mocha": "mocha --require react-native-mock/mock.js --compilers js:babel-core/register 'src/**/*.spec.js' || true",
-    "test:lint": "eslint 'src/**/*.js' || true",
-    "test": "npm-run-all --parallel test:*",
-    "posttest": "rm node_modules/KhanCycle && mv .babelrc .babelrc.test"
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "test:mocha": "mocha --require react-native-mock/mock.js --require ./src/mocks --compilers js:babel-core/register 'src/**/*.spec.js'",
+    "test:lint": "eslint 'src/**/*.js'",
+    "test": "npm-run-all --parallel test:*"
   },
   "dependencies": {
     "react": "~15.0.2",

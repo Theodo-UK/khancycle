@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, ListView, RefreshControl } from 'react-native';
+import { Text, View, ListView, RefreshControl, TouchableHighlight  } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import styles from './StationList.style';
 import CityBikes from '../../services/CityBikes';
 
@@ -104,13 +105,23 @@ class StationList extends Component {
 
   renderRow(rowData, sectionID, rowID) {
     return (
-      <View key={`row-${sectionID}-${rowID}`}>
-        <View style={styles.row}>
-          <Text style={styles.text}>
-            {rowData.extra.name}
-          </Text>
+      <TouchableHighlight onPress={Actions.stationDetail}>
+        <View key={`row-${sectionID}-${rowID}`}>
+          <View style={styles.row}>
+            <Text style={styles.stationName}>
+              {rowData.extra.name}
+            </Text>
+            <View style={styles.details}>
+              <Text style={styles.stationDetails}>
+                Bikes: {rowData.free_bikes}
+              </Text>
+              <Text style={styles.stationDetails}>
+                Spaces: {rowData.empty_slots}
+              </Text>
+            </View>
+          </View>
         </View>
-      </View>
+      </TouchableHighlight>
     );
   }
 
