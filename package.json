@@ -6,7 +6,7 @@
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "test:mocha": "mocha --require react-native-mock/mock.js --compilers js:babel-core/register 'src/**/*.spec.js'",
+    "test:mocha": "mocha --require react-native-mock/mock.js --require ./src/mocks --compilers js:babel-core/register 'src/**/*.spec.js'",
     "test:lint": "eslint 'src/**/*.js'",
     "test": "npm-run-all --parallel test:*"
   },
