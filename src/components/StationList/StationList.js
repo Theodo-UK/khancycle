@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, ListView } from 'react-native';
+import { Text, View, ListView, TouchableHighlight } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import styles from './StationList.style';
 
 class StationList extends Component {
@@ -11,15 +12,18 @@ class StationList extends Component {
     };
   }
 
+
   renderRow(rowData, sectionID, rowID) {
     return (
-      <View key={`row-${sectionID}-${rowID}`}>
-        <View style={styles.row}>
-          <Text style={styles.text}>
-            {rowData.extra.name}
-          </Text>
+      <TouchableHighlight onPress={Actions.stationDetail}>
+        <View key={`row-${sectionID}-${rowID}`}>
+          <View style={styles.row}>
+            <Text style={styles.text}>
+              {rowData.extra.name}
+            </Text>
+          </View>
         </View>
-      </View>
+      </TouchableHighlight>
     );
   }
 
