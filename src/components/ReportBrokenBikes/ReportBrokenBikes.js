@@ -50,7 +50,7 @@ class ReportBrokenBikes extends Component {
         <TouchableHighlight style={styles.wrapper} underlayColor="#cccccc" onPress={that.reportBrokenBikes}>
           <View style={styles.button}>
             <Text style={styles.controlText}>
-              Report Broken Bikes
+              {this.state.reporting ? 'Submit Report' : 'Report Broken Bikes'}
             </Text>
           </View>
         </TouchableHighlight>

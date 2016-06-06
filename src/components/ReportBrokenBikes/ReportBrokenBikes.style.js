@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
   },
   controlText: {
     color: '#4f4c4c',
+    margin: 10,
     textAlignVertical: 'center',
   },
   sliderContainer: {
