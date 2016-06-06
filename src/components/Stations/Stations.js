@@ -4,14 +4,15 @@ import styles from './Stations.style';
 import StationListMap from '../StationListMap/StationListMap';
 import StationList from '../StationList/StationList';
 
+const jsx = props =>
+  <View style={styles.container}>
+    <StationListMap />
+    <StationList {...props} />
+  </View>;
+
 class Stations extends Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <StationListMap />
-        <StationList {...this.props} />
-      </View>
-    );
+    return jsx(this.props);
   }
 }
 
