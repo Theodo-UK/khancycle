@@ -15,6 +15,9 @@ class ReportBrokenBikes extends Component {
   }
 
   reportBrokenBikes() {
+    if (that.state.reporting) {
+      that.props.reportBrokenBikes(that.props.stationId, that.state.brokenBikes);
+    }
     that.setState({
       reporting: !that.state.reporting,
     });
@@ -59,7 +62,9 @@ class ReportBrokenBikes extends Component {
 }
 
 ReportBrokenBikes.propTypes = {
+  stationId: React.PropTypes.string,
   freeBikes: React.PropTypes.number,
+  reportBrokenBikes: React.PropTypes.func,
 };
 
 export default ReportBrokenBikes;
