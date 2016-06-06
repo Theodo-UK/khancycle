@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, MapView } from 'react-native';
 import styles from './StationListMap.style';
 
 const jsx = () =>
   <View style={styles.container}>
-    <Text>Map will go here</Text>
+    <MapView
+      style={styles.map}
+      showsUserLocation={true}
+      followUserLocation={true}
+    />
   </View>;
 
 class StationListMap extends Component {
