@@ -8,7 +8,8 @@
     "ios": "react-native run-ios",
     "test:mocha": "mocha --require react-native-mock/mock.js --require ./src/mocks --compilers js:babel-core/register 'src/**/*.spec.js'",
     "test:lint": "eslint 'src/**/*.js'",
-    "test": "npm-run-all --parallel test:*"
+    "test": "npm-run-all --parallel test:*",
+    "release:android": "cd ./android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "geolib": "^2.0.21",
