@@ -38,6 +38,17 @@ and uncomment this line:
 - click 'Export' and then upload the resulting `.ipa` to HockeyApp
 
 ### Android
-- generate keystore and sign as described [here](https://facebook.github.io/react-native/docs/signed-apk-android.html)
-- enter `android` directory and run `./gradlew assembleRelease`
+#### First-time setup
+- get the keystore (`theodo-uk.keystore`) and passwords from someone on the team.
+- put the keystore in the directory `android/app`.
+- edit the file `~/.gradle/gradle.properties` and add the following lines (replacing `*****` with the correct passwords):
+```
+  THEODO_RELEASE_STORE_FILE=theodo-uk.keystore
+  THEODO_RELEASE_STORE_PASSWORD=*****
+  KHANCYCLE_RELEASE_KEY_ALIAS=khancycle
+  KHANCYCLE_RELEASE_KEY_PASSWORD=*****
+```
+
+#### Building the app
+- build the app using `npm run release:android`
 - upload `android/app/build/outputs/apk/app-release.apk` to HockeyApp
