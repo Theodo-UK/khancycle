@@ -30,7 +30,13 @@ class ReportBrokenBikes extends Component {
   renderSelector() {
     return that.state.reporting ? (
       <View style={styles.sliderContainer}>
-        <Slider style={styles.slider} onValueChange={that.valueChange} value={0} step={1} maximumValue={5} />
+        <Slider
+          style={styles.slider}
+          onValueChange={that.valueChange}
+          value={0}
+          step={1}
+          maximumValue={this.props.freeBikes}
+        />
         <Text style={styles.controlText}>{that.state.brokenBikes}</Text>
       </View>
     ) :
@@ -52,5 +58,9 @@ class ReportBrokenBikes extends Component {
     );
   }
 }
+
+ReportBrokenBikes.propTypes = {
+  freeBikes: React.PropTypes.number,
+};
 
 export default ReportBrokenBikes;
