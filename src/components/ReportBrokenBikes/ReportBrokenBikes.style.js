@@ -14,8 +14,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 6,
   },
-  buttonText: {
+  controlText: {
     color: '#4f4c4c',
+    textAlignVertical: 'center',
+  },
+  sliderContainer: {
+    flexDirection: 'row',
+  },
+  slider: {
+    flex: 1,
   },
 });
 
