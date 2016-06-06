@@ -1,23 +1,65 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableHighlight } from 'react-native';
+import { Text, View, TouchableHighlight, Slider } from 'react-native';
 import styles from './ReportBrokenBikes.style';
 
+let that;
+
 class ReportBrokenBikes extends Component {
+  constructor() {
+    super();
+    that = this;
+    that.state = {
+      reporting: false,
+      brokenBikes: 0,
+    };
+  }
+
   reportBrokenBikes() {
-    console.warn('reported!');
+    that.setState({
+      reporting: !that.state.reporting,
+    });
+  }
+
+  valueChange(value) {
+    that.setState({
+      brokenBikes: value,
+    });
+  }
+
+  renderSelector() {
+    return that.state.reporting ? (
+      <View style={styles.sliderContainer}>
+        <Slider
+          style={styles.slider}
+          onValueChange={that.valueChange}
+          value={0}
+          step={1}
+          maximumValue={this.props.freeBikes}
+        />
+        <Text style={styles.controlText}>{that.state.brokenBikes}</Text>
+      </View>
+    ) :
+      null;
   }
 
   render() {
     return (
-      <TouchableHighlight style={styles.wrapper} underlayColor="#cccccc" onPress={this.reportBrokenBikes}>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>
-            Report Broken Bikes
-          </Text>
-        </View>
-      </TouchableHighlight>
+      <View>
+        {that.renderSelector()}
+        <TouchableHighlight style={styles.wrapper} underlayColor="#cccccc" onPress={that.reportBrokenBikes}>
+          <View style={styles.button}>
+            <Text style={styles.controlText}>
+              {this.state.reporting ? 'Submit Report' : 'Report Broken Bikes'}
+            </Text>
+          </View>
+        </TouchableHighlight>
+      </View>
     );
   }
 }
+
+ReportBrokenBikes.propTypes = {
+  freeBikes: React.PropTypes.number,
+};
 
 export default ReportBrokenBikes;

@@ -15,14 +15,14 @@ class StationDetail extends Component {
         <View style={styles.details}>
           <Text>
             <Text style={styles.detailLabel}>Bikes: </Text>
-            <Text style={styles.detailNumber}>{this.props.free_bikes}</Text>
+            <Text style={styles.detailNumber}>{this.props.freeBikes}</Text>
           </Text>
           <Text>
             <Text style={styles.detailLabel}>Spaces: </Text>
-            <Text style={styles.detailNumber}>{this.props.empty_slots}</Text>
+            <Text style={styles.detailNumber}>{this.props.emptySlots}</Text>
           </Text>
         </View>
-        <ReportBrokenBikes />
+        <ReportBrokenBikes freeBikes={this.props.freeBikes} />
       </View>
     );
   }
@@ -30,8 +30,8 @@ class StationDetail extends Component {
 
 StationDetail.propTypes = {
   title: React.PropTypes.string,
-  free_bikes: React.PropTypes.number,
-  empty_slots: React.PropTypes.number,
+  freeBikes: React.PropTypes.number,
+  emptySlots: React.PropTypes.number,
 };
 
 export default StationDetail;
