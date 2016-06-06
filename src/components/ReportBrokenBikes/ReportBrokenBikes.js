@@ -26,7 +26,6 @@ class ReportBrokenBikes extends Component {
     });
   }
 
-  // <Text>0</Text>
   renderSelector() {
     return that.state.reporting ? (
       <View style={styles.sliderContainer}>
