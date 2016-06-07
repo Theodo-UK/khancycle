@@ -4,8 +4,8 @@ const initialState = new Map();
 
 function brokenBikes(state = initialState, action) {
   switch (action.type) {
-    case 'REPORT_BROKEN':
-      return state.set(action.station, action.number);
+    case 'BROKEN_REPORT_SUCCESS':
+      return state.setIn([action.stationId, 'reported'], true);
     default:
       return state;
   }
