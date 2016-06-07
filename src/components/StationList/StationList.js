@@ -127,6 +127,7 @@ class StationList extends Component {
 
   renderRow(rowData, sectionID, rowID) {
     const goToStationDetail = (row) => () => Actions.stationDetail({
+      stationId: row.id,
       title: row.extra.name,
       freeBikes: row.free_bikes,
       emptySlots: row.empty_slots,
