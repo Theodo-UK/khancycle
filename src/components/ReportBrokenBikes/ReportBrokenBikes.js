@@ -29,6 +29,11 @@ class ReportBrokenBikes extends Component {
     });
   }
 
+  buttonText() {
+    const notReporting = this.props.brokenReportSuccess ? 'Report submitted!' : 'Report Broken Bikes';
+    return this.state.reporting ? 'Submit Report' : notReporting;
+  }
+
   renderSelector() {
     return that.state.reporting ? (
       <View style={styles.sliderContainer}>
@@ -52,7 +57,7 @@ class ReportBrokenBikes extends Component {
         <TouchableHighlight style={styles.wrapper} underlayColor="#cccccc" onPress={that.reportBrokenBikes}>
           <View style={styles.button}>
             <Text style={styles.controlText}>
-              {this.state.reporting ? 'Submit Report' : 'Report Broken Bikes'}
+              {that.buttonText()}
             </Text>
           </View>
         </TouchableHighlight>
@@ -65,6 +70,7 @@ ReportBrokenBikes.propTypes = {
   stationId: React.PropTypes.string,
   freeBikes: React.PropTypes.number,
   reportBrokenBikes: React.PropTypes.func,
+  brokenReportSuccess: React.PropTypes.bool,
 };
 
 export default ReportBrokenBikes;

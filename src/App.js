@@ -1,12 +1,13 @@
 import { createStore, applyMiddleware } from 'redux';
 import { Component } from 'react';
+import thunk from 'redux-thunk';
+
 import rootReducer from './reducers/index';
 import routes from './config/routes';
-import * as firebase from './services/firebase';
 
 // Create the default state and store
 const defaultState = { stations: [], location: {} };
-const store = applyMiddleware(firebase.middleware)(createStore)(rootReducer, defaultState);
+const store = applyMiddleware(thunk)(createStore)(rootReducer, defaultState);
 
 class App extends Component {
   render() {
