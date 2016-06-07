@@ -6,8 +6,6 @@ const jsx = () =>
   <View style={styles.container}>
     <MapView
       style={styles.map}
-      showsUserLocation={true}
-      followUserLocation={true}
     />
   </View>;
 
