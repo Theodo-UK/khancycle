@@ -8,8 +8,8 @@ const jsx = () =>
     <MapView
       style={styles.map}
       initialRegion={{
-        latitude: 37.78825,
-        longitude: -122.4324,
+        latitude: 51.5073,
+        longitude: 0.1276,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       }}
