@@ -1,9 +1,14 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const styles = StyleSheet.create({
+  map: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    padding: 100,
+    width: Dimensions.get('window').width,
+    borderBottomWidth: 1,
+    borderBottomColor: '#999999',
   },
 });
 
