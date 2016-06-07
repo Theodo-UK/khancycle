@@ -40,7 +40,7 @@ class ReportBrokenBikes extends Component {
         <Slider
           style={styles.slider}
           onValueChange={that.valueChange}
-          value={0}
+          value={1}
           step={1}
           maximumValue={this.props.freeBikes}
         />
