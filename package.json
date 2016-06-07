@@ -12,6 +12,7 @@
     "release:android": "cd ./android && ./gradlew assembleRelease"
   },
   "dependencies": {
+    "firebase": "^3.0.0",
     "geolib": "^2.0.21",
     "immutable": "^3.8.1",
     "react": "~15.0.2",
