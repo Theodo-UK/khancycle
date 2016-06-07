@@ -22,16 +22,24 @@ class StationDetail extends Component {
             <Text style={styles.detailNumber}>{this.props.emptySlots}</Text>
           </Text>
         </View>
-        <ReportBrokenBikes freeBikes={this.props.freeBikes} />
+        <ReportBrokenBikes
+          stationId={this.props.stationId}
+          freeBikes={this.props.freeBikes}
+          reportBrokenBikes={this.props.reportBrokenBikes}
+          brokenReportSuccess={this.props.brokenReportSuccess}
+        />
       </View>
     );
   }
 }
 
 StationDetail.propTypes = {
+  stationId: React.PropTypes.string,
   title: React.PropTypes.string,
   freeBikes: React.PropTypes.number,
   emptySlots: React.PropTypes.number,
+  reportBrokenBikes: React.PropTypes.func,
+  brokenReportSuccess: React.PropTypes.bool,
 };
 
 export default StationDetail;
