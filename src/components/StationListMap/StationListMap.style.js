@@ -1,9 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
+  map: {
     flex: 1,
-    padding: 100,
   },
 });
 
