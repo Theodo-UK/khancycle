@@ -14,7 +14,6 @@ var that;
 class StationList extends Component {
   constructor(props) {
     super(props);
-    this.dataSource = dataSourceTemplate;
     this.state = {
       dataSource: dataSourceTemplate,
       refreshing: false,
@@ -66,7 +65,7 @@ class StationList extends Component {
     }
 
     if (nextProps.nearestStations !== this.props.nearestStations) {
-      this.state.dataSource = dataSourceTemplate.cloneWithRows(this.closestStations);
+      this.state.dataSource = dataSourceTemplate.cloneWithRows(nextProps.nearestStations.toArray());
     }
   }
 
