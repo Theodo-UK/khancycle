@@ -10,7 +10,7 @@ const jsx = (location) =>
     accessToken="pk.eyJ1IjoidGhlb2RvdWsiLCJhIjoiY2lwNm55ZXdlMDAwaHVkbm05cDNtNzA3cCJ9.hhMg_ZQceBIAnEvd5tu6Hw"
     centerCoordinate={location}
     userTrackingMode={1}
-    showsUserLocation={true}
+    showsUserLocation
     zoomLevel={14}
   />;
 
@@ -25,5 +25,12 @@ class StationListMap extends Component {
 }
 
 StationListMap.mixins = [Mapbox.Mixin];
+
+StationListMap.propTypes = {
+  location: React.PropTypes.shape({
+    latitude: React.PropTypes.number,
+    longitude: React.PropTypes.number,
+  }),
+};
 
 export default StationListMap;
