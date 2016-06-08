@@ -16,9 +16,10 @@ const jsx = (location) =>
 
 class StationListMap extends Component {
   render() {
+    const propsLocation = this.props.location;
     const location = {
-      latitude: parseFloat(this.props.location.latitude),
-      longitude: parseFloat(this.props.location.longitude),
+      latitude: (propsLocation.latitude != null) ? propsLocation.latitude : 0,
+      longitude: (propsLocation.longitude != null) ? propsLocation.longitude : 0,
     };
     return jsx(location);
   }
