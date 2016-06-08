@@ -7,6 +7,13 @@ cd khancycle
 npm install
 ```
 
+### Android Build Tools
+For Android, you'll need to install Build Tools 23.0.1 for Mapbox to work.
+- Launch Android Studio
+- Open the SDK Manager (Tools > Android > SDK Manager)
+- Click on 'Launch Standalone SDK Manager'
+- Select and download 'Android SDK Build-tools', rev 23.0.1
+
 ## how to run in simulator/emulator
 
 Start the packager:
