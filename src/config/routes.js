@@ -18,8 +18,16 @@ export default (store) => (
           onRight={() => Actions.about()}
           initial
         />
-        <Scene key={'stationDetail'} component={StationDetailContainer.StationDetailContainer} title={'Station Detail'} />
-        <Scene key={'about'} component={AboutContainer.AboutContainer} title={'About'} />
+        <Scene
+          key={'stationDetail'}
+          component={StationDetailContainer.StationDetailContainer}
+          title={'Station Detail'}
+        />
+        <Scene
+          key={'about'}
+          component={AboutContainer.AboutContainer}
+          title={'About'}
+        />
       </Scene>
     </Router>
   </Provider>
