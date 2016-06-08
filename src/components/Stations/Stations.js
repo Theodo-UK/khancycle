@@ -6,7 +6,7 @@ import StationList from '../StationList/StationList';
 
 const jsx = props =>
   <View style={styles.container}>
-    <StationListMap />
+    <StationListMap {...props} />
     <StationList {...props} />
   </View>;
 
