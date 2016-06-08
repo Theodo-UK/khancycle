@@ -2,17 +2,25 @@ import React, { Component } from 'react';
 import styles from './StationListMap.style';
 import Mapbox from 'react-native-mapbox-gl';
 
-const jsx = () =>
+const jsx = (location) =>
+  // Note that we need a centerCoordinate even if userTrackingMode is enabled
+  // -- otherwise, Mapbox will ignore the zoom level.
   <Mapbox
     style={styles.map}
     accessToken="pk.eyJ1IjoidGhlb2RvdWsiLCJhIjoiY2lwNm55ZXdlMDAwaHVkbm05cDNtNzA3cCJ9.hhMg_ZQceBIAnEvd5tu6Hw"
-    centerCoordinate={{ latitude: 51.5073, longitude: -0.1276 }}
+    centerCoordinate={location}
+    userTrackingMode={1}
+    showsUserLocation={true}
     zoomLevel={14}
   />;
 
 class StationListMap extends Component {
   render() {
-    return jsx();
+    const location = {
+      latitude: parseFloat(this.props.location.latitude),
+      longitude: parseFloat(this.props.location.longitude),
+    };
+    return jsx(location);
   }
 }
 
