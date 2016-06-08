@@ -12,6 +12,7 @@ const E = { name: 'E', latitude: 5, longitude: 5 };
 const F = { name: 'F', latitude: 6, longitude: 6 };
 
 // test station and location data
+let nearestStationsActionData;
 const nextProps = {
   stations: [F, D, C, A, B, E],
   location: {
@@ -20,19 +21,27 @@ const nextProps = {
   },
 };
 
+beforeEach(() => {
+  nearestStationsActionData = [];
+});
+
 describe('<StationList />', () => {
   it('should contain a list view', () => {
     const wrapper = shallow(<StationList />);
     expect(wrapper.find(ListView)).to.have.length(1);
   });
 
-  it('should determine the five nearest stations', () => {
+  it('should dispatch the nearestStationsUpdated action', () => {
     const stationList = new StationList();
-    stationList.props = { station: [], location: {} };
+    stationList.props = {
+      station: [],
+      location: {},
+      nearestStationsUpdated(data) { nearestStationsActionData = data; },
+    };
     stationList.componentWillReceiveProps(nextProps);
     // The expected values here are those calculated by the 'geolib' library
     // for the latitudes and longitudes given for the test station objects
-    expect(stationList.closestDistances).to.eql([156900, 313776, 470605, 627364, 784029]);
+    expect(nearestStationsActionData).to.eql([A, B, C, D, E]);
   });
 
   it('should correctly update the list of nearest stations', () => {

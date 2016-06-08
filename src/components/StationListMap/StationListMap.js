@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { List } from 'immutable';
+
 import styles from './StationListMap.style';
 import Mapbox from 'react-native-mapbox-gl';
 
@@ -15,6 +17,11 @@ class StationListMap extends Component {
     return jsx();
   }
 }
+
+
+StationListMap.propTypes = {
+  nearestStations: React.PropTypes.instanceOf(List),
+};
 
 StationListMap.mixins = [Mapbox.Mixin];
 
