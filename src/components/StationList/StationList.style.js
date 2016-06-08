@@ -1,18 +1,27 @@
 import { StyleSheet } from 'react-native';
 
+export const maxStations = 5;
+const rowHeight = 65;
+const separatorHeight = 1;
+const totalHeight = maxStations * (rowHeight + separatorHeight);
+
 const styles = StyleSheet.create({
   container: {
     flex: 0,
+    height: totalHeight,
   },
   row: {
     backgroundColor: '#F6F6F6',
     padding: 10,
+    height: rowHeight,
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   details: {
     flexDirection: 'row',
   },
   separator: {
-    height: 1,
+    height: separatorHeight,
     backgroundColor: '#CCCCCC',
   },
   stationName: {
