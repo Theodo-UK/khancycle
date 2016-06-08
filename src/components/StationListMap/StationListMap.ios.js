@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { View, MapView } from 'react-native';
 import styles from './StationListMap.style';
 
 const jsx = () =>
   <View style={styles.container}>
-    <Text>Map will go here</Text>
+    <MapView
+      style={styles.map}
+    />
   </View>;
 
 class StationListMap extends Component {
