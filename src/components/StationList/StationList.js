@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Text, View, ListView, RefreshControl, TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import geolib from 'geolib';
-import styles from './StationList.style';
+import styles, { maxStations } from './StationList.style';
 import CityBikes from '../../services/CityBikes';
 
 const dataSourceTemplate = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-const maxStations = 5;
 var that;
 
 class StationList extends Component {
