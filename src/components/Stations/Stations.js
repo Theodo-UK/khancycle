@@ -28,6 +28,7 @@ Stations.propTypes = {
     longitude: React.PropTypes.number,
   }),
   updateStations: React.PropTypes.func,
+  nearestStationsUpdated: React.PropTypes.func,
 };
 
 export default Stations;

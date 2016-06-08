@@ -63,6 +63,7 @@ class StationList extends Component {
       }
     }
 
+    this.props.nearestStationsUpdated(this.closestStations);
     this.state.dataSource = dataSourceTemplate.cloneWithRows(this.closestStations);
   }
 
@@ -194,6 +195,7 @@ StationList.propTypes = {
     longitude: React.PropTypes.number,
   }),
   updateStations: React.PropTypes.func,
+  nearestStationsUpdated: React.PropTypes.func,
 };
 
 export default StationList;

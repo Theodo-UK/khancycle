@@ -5,3 +5,10 @@ export function updateStations(stations) {
     stations,
   };
 }
+// nearest stations updated
+export function nearestStationsUpdated(nearestStations) {
+  return {
+    type: 'NEAREST_STATIONS_UPDATED',
+    nearestStations,
+  };
+}
