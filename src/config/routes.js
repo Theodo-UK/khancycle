@@ -14,7 +14,7 @@ export default (store) => (
           key={'stations'}
           component={Stations.Stations}
           title={'KhanCycle'}
-          rightTitle={'About'}
+          rightTitle={'?'}
           onRight={() => Actions.about()}
           initial
         />
