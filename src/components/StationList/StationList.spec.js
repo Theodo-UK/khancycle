@@ -1,6 +1,8 @@
 import React, { ListView } from 'react-native';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
+import { List } from 'immutable';
+
 import StationList from './StationList';
 
 // test station objects
@@ -42,6 +44,13 @@ describe('<StationList />', () => {
     // The expected values here are those calculated by the 'geolib' library
     // for the latitudes and longitudes given for the test station objects
     expect(nearestStationsActionData).to.eql([A, B, C, D, E]);
+  });
+
+  it('should update the list view with new nearest stations', () => {
+    const stationList = new StationList();
+    stationList.props = { };
+    stationList.componentWillReceiveProps({ nearestStations: new List([A, B]), location: {} });
+    expect(stationList.state.dataSource._dataBlob).to.eql([A, B]);
   });
 
   it('should correctly update the list of nearest stations', () => {
