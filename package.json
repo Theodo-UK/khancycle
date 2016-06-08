@@ -9,12 +9,13 @@
     "test:mocha": "mocha --require react-native-mock/mock.js --require ./src/mocks --compilers js:babel-core/register 'src/**/*.spec.js'",
     "test:lint": "eslint 'src/**/*.js'",
     "test": "npm-run-all --parallel test:*",
-    "release:android": "cd ./android && ./gradlew assembleRelease"
+    "release:android": "npm install && cd ./android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "firebase": "^3.0.0",
     "geolib": "^2.0.21",
     "immutable": "^3.8.1",
+    "moment": "^2.13.0",
     "react": "~15.0.2",
     "react-dom": "~15.0.2",
     "react-native": "^0.26.2",

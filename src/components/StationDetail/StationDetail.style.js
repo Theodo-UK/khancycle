@@ -9,7 +9,14 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 20,
+    marginBottom: 10,
+  },
+  brokenDetail: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  reportBrokenBikes: {
+    marginTop: 10,
   },
   detailLabel: {
     color: '#7f7f7f',
