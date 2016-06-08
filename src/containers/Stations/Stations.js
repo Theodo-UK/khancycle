@@ -5,6 +5,7 @@ import { updateLocation } from '../../actions/location';
 
 const mapStateToProps = (state) => ({
   stations: state.stations,
+  nearestStations: state.nearestStations,
   location: state.location,
 });
 const mapDispatchToProps = {

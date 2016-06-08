@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Text, View, ListView, RefreshControl, TouchableHighlight } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import geolib from 'geolib';
+import { List } from 'immutable';
+
 import styles from './StationList.style';
 import CityBikes from '../../services/CityBikes';
 
@@ -33,12 +35,11 @@ class StationList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.closestStations = [];
-    this.closestDistances = [];
-
     // If we have a location...
     if (nextProps.location.latitude != null && nextProps.location.longitude != null) {
       if (nextProps.stations !== this.props.stations || nextProps.location !== this.props.location) {
+        this.closestStations = [];
+        this.closestDistances = [];
         for (const station of nextProps.stations) {
           // Determine distance to station
           const distance = geolib.getDistance(
@@ -60,11 +61,13 @@ class StationList extends Component {
         for (let i = 0; i < this.closestStations.length; i++) {
           this.closestStations[i].distance = this.closestDistances[i];
         }
+        this.props.nearestStationsUpdated(this.closestStations);
       }
     }
 
-    this.props.nearestStationsUpdated(this.closestStations);
-    this.state.dataSource = dataSourceTemplate.cloneWithRows(this.closestStations);
+    if (nextProps.nearestStations !== this.props.nearestStations) {
+      this.state.dataSource = dataSourceTemplate.cloneWithRows(this.closestStations);
+    }
   }
 
   getStationsList(changeRefreshingState = true) {
@@ -190,6 +193,7 @@ StationList.propTypes = {
         name: React.PropTypes.string.isRequired,
       }),
     }).isRequired),
+  nearestStations: React.PropTypes.instanceOf(List),
   location: React.PropTypes.shape({
     latitude: React.PropTypes.number,
     longitude: React.PropTypes.number,
