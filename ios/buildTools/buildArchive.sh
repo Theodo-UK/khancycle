@@ -14,3 +14,7 @@ xcodebuild archive -project KhanCycle.xcodeproj -scheme KhanCycle -archivePath K
 # Save archive for ad-hoc deployment (You'll get a deprecation warning, but the
 # new method doesn't work correctly -- http://stackoverflow.com/a/34003826).
 xcodebuild -exportArchive -archivePath KhanCycle.xcarchive -exportPath KhanCycle -exportFormat ipa -exportProvisioningProfile "KhanCycle: Ad-Hoc Distribution"
+
+# Remove archive and restore AppDelegate.m
+rm -rf KhanCycle.xcarchive
+git checkout KhanCycle/AppDelegate.m

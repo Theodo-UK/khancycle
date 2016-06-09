@@ -9,7 +9,13 @@
     "test:mocha": "mocha --require react-native-mock/mock.js --require ./src/mocks --compilers js:babel-core/register 'src/**/*.spec.js'",
     "test:lint": "eslint 'src/**/*.js'",
     "test": "npm-run-all --continue-on-error --parallel test:*",
-    "release:android": "npm install && cd ./android && ./gradlew assembleRelease"
+    "build:android": "npm install && cd ./android && ./gradlew assembleRelease",
+    "build:ios": "cd ./ios && sh ./buildTools/buildArchive.sh",
+    "move-build:android": "mv ./android/app/build/outputs/apk/app-release.apk ./builds",
+    "move-build:ios": "mv ./ios/KhanCycle.ipa ./builds",
+    "release:android": "npm run build:android && npm run move-build:android",
+    "release:ios": "npm run build:ios && npm run move-build:ios",
+    "release": "npm run release:android && npm run release:ios"
   },
   "dependencies": {
     "firebase": "^3.0.0",
