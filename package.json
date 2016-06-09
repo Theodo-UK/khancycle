@@ -15,7 +15,7 @@
     "move-build:ios": "mv ./ios/KhanCycle.ipa ./builds",
     "release:android": "npm run build:android && npm run move-build:android",
     "release:ios": "npm run build:ios && npm run move-build:ios",
-    "release": "npm run release:android && npm run release:ios"
+    "release": "npm-run-all --parallel release:*"
   },
   "dependencies": {
     "firebase": "^3.0.0",
