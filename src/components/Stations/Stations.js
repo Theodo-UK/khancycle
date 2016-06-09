@@ -8,7 +8,7 @@ import StationList from '../StationList/StationList';
 
 const jsx = pros =>
   <View style={styles.container}>
-    <StationListMap nearestStations={pros.nearestStations} />
+    <StationListMap {...pros} />
     <StationList {...pros} />
   </View>;
 
