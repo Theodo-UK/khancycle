@@ -30,7 +30,7 @@ class StationList extends Component {
   }
 
   componentDidMount() {
-    this.refreshData(false);
+    this.refreshData(false, true);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -107,8 +107,11 @@ class StationList extends Component {
     }
   }
 
-  refreshData(changeRefreshingState = true) {
+  refreshData(changeRefreshingState = true, useLastKnownLocation = false) {
     if (changeRefreshingState) that.setState({ refreshing: true });
+
+    // Determine the maximum age of the location
+    let maximumAge = useLastKnownLocation ? 3600000 : 1000;
 
     // First, get the user's current location
     navigator.geolocation.getCurrentPosition(
@@ -124,8 +127,14 @@ class StationList extends Component {
         that.props.updateLocation(null, null);
         if (changeRefreshingState) that.setState({ refreshing: false });
       },
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: maximumAge }
     );
+
+    // If we're okay with using the last known location, then request
+    // a more accurate location immediately. 
+    if (useLastKnownLocation) {
+      this.refreshData(changeRefreshingState, false);
+    }
   }
 
   renderRow(rowData, sectionID, rowID) {
