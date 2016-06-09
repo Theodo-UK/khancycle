@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Platform } from 'react-native';
 import { List } from 'immutable';
 import Mapbox from 'react-native-mapbox-gl';
 import reactMixin from 'react-mixin';
@@ -36,8 +37,9 @@ class StationListMap extends Component {
         Math.min(...latitudes), Math.min(...longitudes),
         // NE corner of bounding box
         Math.max(...latitudes), Math.max(...longitudes),
-        // padding - top needs more so it's not under header
-        100, 50, 50, 50
+        // padding - top needs more so it's not under header,
+        //           and needs more on android
+        (Platform.OS === 'android' ? 300 : 100), 50, 50, 50
       );
     }
   }
