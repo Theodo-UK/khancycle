@@ -8,7 +8,7 @@
     "ios": "react-native run-ios",
     "test:mocha": "mocha --require react-native-mock/mock.js --require ./src/mocks --compilers js:babel-core/register 'src/**/*.spec.js'",
     "test:lint": "eslint 'src/**/*.js'",
-    "test": "npm-run-all --parallel test:*",
+    "test": "npm-run-all --continue-on-error --parallel test:*",
     "release:android": "npm install && cd ./android && ./gradlew assembleRelease"
   },
   "dependencies": {
