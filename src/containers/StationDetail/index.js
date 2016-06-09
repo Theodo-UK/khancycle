@@ -1,1 +1,1 @@
-export { default as StationDetail } from './StationDetail';
+export { default as StationDetailContainer } from './StationDetail';
