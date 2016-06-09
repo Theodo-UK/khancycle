@@ -9,10 +9,11 @@
     "test:mocha": "mocha --require react-native-mock/mock.js --require ./src/mocks --compilers js:babel-core/register 'src/**/*.spec.js'",
     "test:lint": "eslint 'src/**/*.js'",
     "test": "npm-run-all --continue-on-error --parallel test:*",
-    "build:android": "npm install && cd ./android && ./gradlew assembleRelease",
+    "build:android": "cd ./android && ./gradlew assembleRelease",
     "build:ios": "cd ./ios && sh ./buildTools/buildArchive.sh",
     "postbuild:android": "mv ./android/app/build/outputs/apk/app-release.apk ./builds",
     "postbuild:ios": "mv ./ios/KhanCycle.ipa ./builds",
+    "prerelease": "npm install",
     "release": "npm-run-all --parallel build:*"
   },
   "dependencies": {
