@@ -11,11 +11,9 @@
     "test": "npm-run-all --continue-on-error --parallel test:*",
     "build:android": "npm install && cd ./android && ./gradlew assembleRelease",
     "build:ios": "cd ./ios && sh ./buildTools/buildArchive.sh",
-    "move-build:android": "mv ./android/app/build/outputs/apk/app-release.apk ./builds",
-    "move-build:ios": "mv ./ios/KhanCycle.ipa ./builds",
-    "release:android": "npm run build:android && npm run move-build:android",
-    "release:ios": "npm run build:ios && npm run move-build:ios",
-    "release": "npm-run-all --parallel release:*"
+    "postbuild:android": "mv ./android/app/build/outputs/apk/app-release.apk ./builds",
+    "postbuild:ios": "mv ./ios/KhanCycle.ipa ./builds",
+    "release": "npm-run-all --parallel build:*"
   },
   "dependencies": {
     "firebase": "^3.0.0",

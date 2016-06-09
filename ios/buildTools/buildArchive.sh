@@ -17,4 +17,4 @@ xcodebuild -exportArchive -archivePath KhanCycle.xcarchive -exportPath KhanCycle
 
 # Remove archive and restore AppDelegate.m
 rm -rf KhanCycle.xcarchive
-git checkout KhanCycle/AppDelegate.m
+git checkout -- KhanCycle/AppDelegate.m
