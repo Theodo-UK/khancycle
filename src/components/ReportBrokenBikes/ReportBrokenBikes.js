@@ -52,7 +52,7 @@ class ReportBrokenBikes extends Component {
 
   render() {
     return (
-      <View>
+      <View style={that.props.style}>
         {that.renderSelector()}
         <TouchableHighlight style={styles.wrapper} underlayColor="#cccccc" onPress={that.reportBrokenBikes}>
           <View style={styles.button}>
@@ -67,6 +67,7 @@ class ReportBrokenBikes extends Component {
 }
 
 ReportBrokenBikes.propTypes = {
+  style: View.propTypes.style,
   stationId: React.PropTypes.string,
   freeBikes: React.PropTypes.number,
   reportBrokenBikes: React.PropTypes.func,
