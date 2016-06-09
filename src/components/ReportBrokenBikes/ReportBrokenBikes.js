@@ -10,7 +10,7 @@ class ReportBrokenBikes extends Component {
     that = this;
     that.state = {
       reporting: false,
-      brokenBikes: 0,
+      brokenBikes: 1,
     };
   }
 
