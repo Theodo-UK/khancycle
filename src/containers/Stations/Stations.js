@@ -1,16 +1,18 @@
 import { connect } from 'react-redux';
 import Stations from '../../components/Stations/Stations';
-import * as stationsActions from '../../actions/stations';
-import * as locationActions from '../../actions/location';
+import { updateStations, nearestStationsUpdated } from '../../actions/stations';
+import { updateLocation } from '../../actions/location';
 
 const mapStateToProps = (state) => ({
   stations: state.stations,
+  nearestStations: state.nearestStations,
   location: state.location,
 });
-const mapDispatchToProps = (dispatch) => ({
-  updateStations: (stations) => dispatch(stationsActions.updateStations(stations)),
-  updateLocation: (latitude, longitude) => dispatch(locationActions.updateLocation(latitude, longitude)),
-});
+const mapDispatchToProps = {
+  updateStations,
+  nearestStationsUpdated,
+  updateLocation,
+};
 
 const StationsContainer = connect(
   mapStateToProps,
