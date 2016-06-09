@@ -56,8 +56,8 @@ class StationListMap extends Component {
   render() {
     const propsLocation = this.props.location;
     const location = {
-      latitude: (propsLocation.latitude != null) ? propsLocation.latitude : 0,
-      longitude: (propsLocation.longitude != null) ? propsLocation.longitude : 0,
+      latitude: (propsLocation.latitude != null) ? propsLocation.latitude : 51.5073,
+      longitude: (propsLocation.longitude != null) ? propsLocation.longitude : -0.1276,
     };
     const annotations = this.props.nearestStations
     .map(st => this.stationToAnnotation(st))
