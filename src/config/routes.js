@@ -5,7 +5,6 @@ import * as StationsContainer from '../containers/Stations';
 import * as StationDetailContainer from '../containers/StationDetail';
 import * as AboutContainer from '../containers/About';
 
-
 export default (store) => (
   <Provider store={store}>
     <Router>
