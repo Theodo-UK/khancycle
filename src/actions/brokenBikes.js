@@ -11,3 +11,18 @@ export function reportBrokenBikes(stationId, number) {
   return dispatch => firebase.reportBrokenBikes(stationId, number)
     .then(() => dispatch(successfulReport(stationId, number)));
 }
+
+export function brokenBikeReportsUpdated(brokenBikeReports) {
+  return {
+    type: 'BROKEN_REPORTS_UPDATED',
+    brokenBikeReports,
+  };
+}
+
+export function syncBrokenBikeReports() {
+  return dispatch =>
+    firebase.syncBrokenBikeReports(data =>
+      dispatch(brokenBikeReportsUpdated(data)
+    )
+  );
+}

@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/database';
+import { brokenBikeReportsUpdated } from '../actions/brokenBikes';
 
 const config = {
   apiKey: 'AIzaSyBzoiGUxpA1S4of9WTfVvYCgBSWsFFQnc8',
@@ -14,5 +15,11 @@ export function reportBrokenBikes(stationId, number) {
   return bikeReportsRef.child(stationId).set({
     timestamp: (new Date()).toISOString(),
     number,
+  });
+}
+
+export function syncBrokenBikeReports(store) {
+  bikeReportsRef.on('value', (data) => {
+    store.dispatch(brokenBikeReportsUpdated(data.val()));
   });
 }
