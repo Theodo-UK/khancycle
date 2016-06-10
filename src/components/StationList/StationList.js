@@ -9,6 +9,13 @@ import styles, { maxStations } from './StationList.style';
 import CityBikes from '../../services/CityBikes';
 
 const dataSourceTemplate = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+const locationIsValid = location => location.latitude != null && location.longitude != null;
+const locationIsNewerThanPrevious = (oldLoc, newLoc) => {
+  if (!newLoc.isUpToDate && oldLoc) {
+    return !oldLoc.isUpToDate;
+  }
+  return true;
+};
 var that;
 
 class StationList extends Component {
@@ -30,30 +37,33 @@ class StationList extends Component {
   }
 
   componentDidMount() {
-    this.refreshData(false);
+    this.refreshData(false, true);
   }
 
   componentWillReceiveProps(nextProps) {
+    const newLocation = nextProps.location;
+    const oldLocation = this.props.location;
     // If we have a location...
-    if (nextProps.location.latitude != null && nextProps.location.longitude != null) {
-      if (nextProps.stations !== this.props.stations || nextProps.location !== this.props.location) {
-        this.closestStations = [];
-        this.closestDistances = [];
-        for (const station of nextProps.stations) {
-          // Determine distance to station
-          const distance = geolib.getDistance(
-            { latitude: station.latitude, longitude: station.longitude },
-            { latitude: nextProps.location.latitude, longitude: nextProps.location.longitude }
-          );
+    if (locationIsValid(newLocation)
+      && locationIsNewerThanPrevious(oldLocation, newLocation)
+      && (nextProps.stations !== this.props.stations || newLocation !== oldLocation)
+    ) {
+      this.closestStations = [];
+      this.closestDistances = [];
+      for (const station of nextProps.stations) {
+        // Determine distance to station
+        const distance = geolib.getDistance(
+          { latitude: station.latitude, longitude: station.longitude },
+          { latitude: newLocation.latitude, longitude: newLocation.longitude }
+        );
 
-          // The 'furthestClosestDistance' is the furthest distance in the 'closestDistances' array.
-          // (That array is sorted, so we know that it's always the last element.) If the current
-          // station is *closer* than this furthest distance, then we know we should add it to the
-          // 'closestStations' array. Otherwise, we move on to the next station...
-          const furthestClosestDistance = this.closestDistances[this.closestDistances.length - 1];
-          if (distance < furthestClosestDistance || this.closestStations.length < maxStations) {
-            this.updateClosestStations(station, distance);
-          }
+        // The 'furthestClosestDistance' is the furthest distance in the 'closestDistances' array.
+        // (That array is sorted, so we know that it's always the last element.) If the current
+        // station is *closer* than this furthest distance, then we know we should add it to the
+        // 'closestStations' array. Otherwise, we move on to the next station...
+        const furthestClosestDistance = this.closestDistances[this.closestDistances.length - 1];
+        if (distance < furthestClosestDistance || this.closestStations.length < maxStations) {
+          this.updateClosestStations(station, distance);
         }
 
         // Add these distances to the station objects
@@ -107,8 +117,11 @@ class StationList extends Component {
     }
   }
 
-  refreshData(changeRefreshingState = true) {
+  refreshData(changeRefreshingState = true, useLastKnownLocation = false) {
     if (changeRefreshingState) that.setState({ refreshing: true });
+
+    // Determine the maximum age of the location
+    const maximumAge = useLastKnownLocation ? 3600000 : 1000;
 
     // First, get the user's current location
     navigator.geolocation.getCurrentPosition(
@@ -116,16 +129,22 @@ class StationList extends Component {
         // Deal with the position here.
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
-        that.props.updateLocation(latitude, longitude);
+        that.props.updateLocation(latitude, longitude, useLastKnownLocation);
         // Then retrieve the list of stations
         that.getStationsList(changeRefreshingState);
       },
       () => {
-        that.props.updateLocation(null, null);
+        that.props.updateLocation(null, null, useLastKnownLocation);
         if (changeRefreshingState) that.setState({ refreshing: false });
       },
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      { enableHighAccuracy: true, timeout: 20000, maximumAge }
     );
+
+    // If we've asked for the last known location, then request a more accurate
+    // location as well to make sure we get accurate data.
+    if (useLastKnownLocation) {
+      this.refreshData(changeRefreshingState, false);
+    }
   }
 
   renderRow(rowData, sectionID, rowID) {
@@ -196,6 +215,7 @@ StationList.propTypes = {
   location: React.PropTypes.shape({
     latitude: React.PropTypes.number,
     longitude: React.PropTypes.number,
+    isUpToDate: React.PropTypes.bool,
   }),
   updateStations: React.PropTypes.func,
   nearestStationsUpdated: React.PropTypes.func,
