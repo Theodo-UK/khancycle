@@ -18,11 +18,3 @@ export function brokenBikeReportsUpdated(brokenBikeReports) {
     brokenBikeReports,
   };
 }
-
-export function syncBrokenBikeReports() {
-  return dispatch =>
-    firebase.syncBrokenBikeReports(data =>
-      dispatch(brokenBikeReportsUpdated(data)
-    )
-  );
-}
