@@ -20,6 +20,7 @@ const nextProps = {
   location: {
     latitude: 0,
     longitude: 0,
+    isUpToDate: true,
   },
 };
 
@@ -44,6 +45,21 @@ describe('<StationList />', () => {
     // The expected values here are those calculated by the 'geolib' library
     // for the latitudes and longitudes given for the test station objects
     expect(nearestStationsActionData).to.eql([A, B, C, D, E]);
+  });
+
+  it('should not dispatch the nearestStationsUpdated action if new location is outdated', () => {
+    let nearestStationsCalled = false;
+    const newProps = { location: { latitude: 3, longitude: 4, isUpToDate: false } };
+    const stationList = new StationList();
+    stationList.props = {
+      station: [],
+      location: { latitude: 1, longitude: 2, isUpToDate: true },
+      nearestStationsUpdated() { nearestStationsCalled = true; },
+    };
+    stationList.componentWillReceiveProps(newProps);
+    // The expected values here are those calculated by the 'geolib' library
+    // for the latitudes and longitudes given for the test station objects
+    expect(nearestStationsCalled).to.eql(false);
   });
 
   it('should update the list view with new nearest stations', () => {
