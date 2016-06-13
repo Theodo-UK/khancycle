@@ -12,7 +12,7 @@ const database = firebase.initializeApp(config).database();
 const bikeReportsRef = database.ref('brokenBikes');
 
 export function reportBrokenBikes(stationId, number) {
-  return bikeReportsRef.child(stationId).set({
+  return bikeReportsRef.child(stationId).push({
     timestamp: (new Date()).toISOString(),
     number,
   });
