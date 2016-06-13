@@ -2,9 +2,19 @@ import { connect } from 'react-redux';
 import StationDetail from '../../components/StationDetail/StationDetail';
 import { reportBrokenBikes } from '../../actions/brokenBikes';
 
-const getMostRecentReport = list => list && list.max(
-  (reportA, reportB) => reportA.get('timestamp') > reportB.get('timestamp')
-);
+const getMostRecentReport = list => {
+  if (list) {
+    // to avoid crashing when dealing with data uploaded by old app
+    if (list.get('timestamp')) {
+      // most recent upload was from the old version of the app
+      return list;
+    } else {
+      // most recent report was from new version of the app
+      return list.max((reportA, reportB) =>
+      reportA.get('timestamp') > reportB.get('timestamp'))
+    }
+  }
+};
 
 export const mapStateToProps = (state, ownProps) => ({
   stations: state.stations,
