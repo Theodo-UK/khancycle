@@ -25,6 +25,7 @@
     "react-dom": "~15.0.2",
     "react-mixin": "^2.0.2",
     "react-native": "^0.26.2",
+    "react-native-device-info": "^0.9.3",
     "react-native-mapbox-gl": "^4.1.1",
     "react-native-router-flux": "^3.26.13",
     "react-redux": "^4.4.5",
