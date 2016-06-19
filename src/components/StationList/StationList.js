@@ -79,8 +79,8 @@ class StationList extends Component {
     }
   }
 
-  getStationsList(changeRefreshingState = true) {
-    CityBikes.getStationsList()
+  getStationsList(changeRefreshingState = true, latitude = null, longitude = null) {
+    CityBikes.getStationsList(latitude, longitude)
       .then(
         (result) => {
           this.props.updateStations(result.network.stations);
@@ -131,7 +131,7 @@ class StationList extends Component {
         var longitude = position.coords.longitude;
         that.props.updateLocation(latitude, longitude, useLastKnownLocation);
         // Then retrieve the list of stations
-        that.getStationsList(changeRefreshingState);
+        that.getStationsList(changeRefreshingState, latitude, longitude);
       },
       () => {
         that.props.updateLocation(null, null, useLastKnownLocation);
@@ -150,7 +150,7 @@ class StationList extends Component {
   renderRow(rowData, sectionID, rowID) {
     const goToStationDetail = (row) => () => Actions.stationDetail({
       stationId: row.id,
-      title: row.extra.name,
+      title: row.name.split(' - ')[1],
       freeBikes: row.free_bikes,
       emptySlots: row.empty_slots,
     });
@@ -159,7 +159,7 @@ class StationList extends Component {
         <View key={`row-${sectionID}-${rowID}`}>
           <View style={styles.row}>
             <Text style={styles.stationName}>
-              {rowData.extra.name}
+              {rowData.name.split(' - ')[1]}
             </Text>
             <View style={styles.details}>
               <Text style={styles.stationDistance}>
@@ -207,9 +207,7 @@ class StationList extends Component {
 StationList.propTypes = {
   stations: React.PropTypes.arrayOf(
     React.PropTypes.shape({
-      extra: React.PropTypes.shape({
-        name: React.PropTypes.string.isRequired,
-      }),
+      name: React.PropTypes.string.isRequired,
     }).isRequired),
   nearestStations: React.PropTypes.instanceOf(List),
   location: React.PropTypes.shape({

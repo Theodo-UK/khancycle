@@ -21,9 +21,7 @@ class Stations extends Component {
 Stations.propTypes = {
   stations: React.PropTypes.arrayOf(
     React.PropTypes.shape({
-      extra: React.PropTypes.shape({
-        name: React.PropTypes.string.isRequired,
-      }),
+      name: React.PropTypes.string.isRequired,
     }).isRequired),
   nearestStations: React.PropTypes.instanceOf(List),
   location: React.PropTypes.shape({

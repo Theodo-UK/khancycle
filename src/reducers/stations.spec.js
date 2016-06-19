@@ -6,11 +6,11 @@ const initialState = {};
 const testResponse = {
   network: {
     stations: [
-      { extra: { name: 'Station 01' } },
-      { extra: { name: 'Station 02' } },
-      { extra: { name: 'Station 03' } },
-      { extra: { name: 'Station 04' } },
-      { extra: { name: 'Station 05' } },
+      { name: '0001 - Station 01' },
+      { name: '0002 - Station 02' },
+      { name: '0003 - Station 03' },
+      { name: '0004 - Station 04' },
+      { name: '0005 - Station 05' },
     ],
   },
 };
