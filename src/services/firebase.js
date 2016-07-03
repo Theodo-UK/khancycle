@@ -4,7 +4,7 @@ import { brokenBikeReportsUpdated } from '../actions/brokenBikes';
 import DeviceInfo from 'react-native-device-info';
 
 const config = {
-  apiKey: '***REMOVED***',
+  apiKey: 'XXX',
   authDomain: 'project-908306213235132709.firebaseapp.com',
   databaseURL: 'https://project-908306213235132709.firebaseio.com',
   storageBucket: 'project-908306213235132709.appspot.com',
