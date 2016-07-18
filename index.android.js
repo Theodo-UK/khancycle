@@ -4,12 +4,19 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry } from 'react-native';
-import App from './src/App'
+import { AppRegistry, BackAndroid } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+
+import App from './src/App';
+
+BackAndroid.addEventListener('hardwareBackPress', () => {
+  Actions.pop();
+  return true;
+});
 
 class KhanCycle extends Component {
   render() {
-    return (<App />)
+    return (<App />);
   }
 }
 
