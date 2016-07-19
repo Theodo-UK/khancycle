@@ -24,12 +24,11 @@ class CityBikes {
     });
   }
 
-  static getStationsList(latitude, longitude) {
+  static getStationsList(latitude) {
     if (!latitude || latitude > 50) {
       return this.get('networks/barclays-cycle-hire', 'fields=stations');
-    } else {
-      return this.get('networks/velib', 'fields=stations');
     }
+    return this.get('networks/velib', 'fields=stations');
   }
 }
 

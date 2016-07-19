@@ -1,5 +1,7 @@
 # khancycle
 
+[![CircleCI](https://circleci.com/gh/Theodo-UK/khancycle.svg?style=shield)](https://circleci.com/gh/Theodo-UK/khancycle)
+
 ## how to install
 
 ```bash
