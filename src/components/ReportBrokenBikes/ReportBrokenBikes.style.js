@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   slider: {
+    marginBottom: Platform.OS === 'android' ? 7 : 0,
     flex: 1,
   },
 });
